@@ -84,3 +84,57 @@ fun main() {
 
 ---
 
+## 추상 타입과 유연함
+
+### 추상화
+- `추상화(abstraction)`는 데이터나 프로세스 등을 의미가 비슷한 개념이나 표현으로 정의하는 과정을 말한다.
+- 단순히 구현 클래스에서 추상 타입을 이끌어 내는 것만 추상화가 아니라 `sum += mark`와 같은 코드도 실제로는 내부적으로 메모리에서 값을 읽고 변경하고 다시 재할당해주는 과정이지만, 이 과정이 위 코드에는 드러나지 않으며 컴퓨터가 수행하는 일련의 처리 과정을 개념적으로 `추상화하고 있다`고 볼 수 있다.
+- 상속받은 `interface`에 정의된 메소드나 데이터를 `class`로 모두 구현한 것을 `콘크리트 클래스(concrete class)`라고 부른다. 
+
+### 추상 타입을 이용한 구현 교체의 유연함
+- 코드
+
+    ```kotlin
+    interface LogCollector {
+        fun collect()
+    }
+
+    class FtpLogFileDownloader : LogCollector {
+        override fun collect() { println("FtpLogFileDownloader") }
+    }
+
+    class SocketLogReader : LogCollector {
+        override fun collect() { println("SocketLogReader") }
+    }
+
+    class DbTableLogGateway : LogCollector {
+        override fun collect() { println("DbTableLogGateway") }
+    }
+
+    fun main() {
+        val ftpLogReader = FtpLogFileDownloader()
+        var logs = Logs(ftpLogReader)
+        logs.read()
+
+        val socketLogReader = SocketLogReader()
+        logs = Logs(socketLogReader)
+        logs.read()
+
+        val dbTableLogGateway = DbTableLogGateway()
+        logs = Logs(dbTableLogGateway)
+        logs.read()
+    }
+
+    class Logs(private val logCollector: LogCollector) {
+        fun read() = logCollector.collect()
+    }
+    ```
+- 결과
+
+    ```text
+    FtpLogFileDownloader
+    SocketLogReader
+    DbTableLogGateway
+    ```
+
+- 만약 `FTP`로 로그 기록을 가져오던 코드를 `Socket`으로 가져올 수 있도록 수정 요청이 들어왔을 때 단순히 `SocketLogReader`클래스만 생성한 후 `Logs` 클래스의 생성자로 넘겨주게 되면 다른 부분은 수정할 필요가 없이 변경이 가능하다는 장점이 있다.
