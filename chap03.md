@@ -77,6 +77,8 @@ class Inheritance2: Test2(), Test2, Test4
                 - 반대로, 객체들이 같은 데이터를 가지고 있더라고 다른 행동을 하면 동일한 타입이 아니다
                     - 앞서 설명한 다형성에서 동일한 요청(메시지)에 대해 서로 다른 방식으로 응답할 수 있는 능력
                         - 동일한 요청에 대해서 응답하는 것 -> 동일한 행동/책임
+                        - 책의 예제
+                          - 동일한 요청(=로그를 수집하라)에 대해 서로 다른 방식(=파일로부터, 소켓으로부터, 데이터베이스로부터)으로 응답할 수 있는 능력(=로그를 수집)
 
 ```
 class Dog {
@@ -128,21 +130,17 @@ pet.bark() // 야옹
 - 왜 콘크리트 클래스를 바로 사용하지 않고 추상 타입을 이용해야 할까?
 
 ```
-interface Pet {
-    var name: String
-    fun bark()
-}
 
 class Dog : Pet {
-    override var name: String = "멍멍이"
-    override fun bark() {
+   val name: String = "멍멍이"
+   fun bark() {
         println("멍멍")
     }
 }
 
 class Cat : Pet {
-    override var name: String = "야옹이"
-    override fun bark() {
+    val name: String = "야옹이"
+    fun bark() {
         println("야옹")
     }
 }
@@ -152,7 +150,7 @@ fun shoutName(pet:Any) {
     when (pet) {
         is Dog -> println("${pet.name}입니다")
         is Cat -> println("${pet.name}입니다")
-        else -> println("동물이 아닙니다")
+        else -> println("애완동물이 아닙니다")
     }
 ```
 
@@ -160,8 +158,8 @@ fun shoutName(pet:Any) {
 
 ```
 class Parrot: Pet {
-    override var name: String = "앵무새"
-  override fun bark() {
+  val name: String = "앵무새"
+  fun bark() {
   println("안녕")
   }
   
@@ -170,46 +168,46 @@ fun shoutName(pet:Any) {
         is Dog -> println("${pet.name}입니다")
         is Cat -> println("${pet.name}입니다")
         is Parrot -> println("${pet.name}입니다")
-        else -> println("동물이 아닙니다")
+        else -> println("애완 동물이 아닙니다")
     }
 ```
 - 추상 타입을 쓴다면?
 ```
 interface Pet {
-    var name: String
+    val name: String
     fun bark()
 }
 
 class Dog : Pet {
-    override var name: String = "멍멍이"
+    override val name: String = "멍멍이"
     override fun bark() {
         println("멍멍")
     }
 }
 
 class Cat : Pet {
-    override var name: String = "야옹이"
+    override val name: String = "야옹이"
     override fun bark() {
         println("야옹")
     }
 }
 
 class Parrot: Pet {
-    override var name: String = "앵무새"
+    override val name: String = "앵무새"
     override fun bark() {
         println("안녕")
     }
 }
 
 fun shoutName(pet:Any) {
-    val pet: Pet = specify(pet)
+    val pet: Pet = verifyPet(pet)
     println("${pet.name}입니다")
     }
 ```
-- specify(pet)함수는 입력받은 매개변수를 Pet 타입으로 할당해주는 메서드
+- verifyPet(pet)함수는 입력받은 매개변수를 Pet 타입으로 할당해주는 메서드
   - shoutName 함수 안에 이름을 외치는 기능과 매개변수를 Pet 객체 타입으로 만드는 기능이 있다면 이를 분리하여 책임을 분담해야 한다
 - 만약 추가 요구 사항으로 뱀, 햄스터 등등 다른 펫이 추가되어도?
-  - specify 메서드에서만 변화가 생김
+  - verifyPet 메서드에서만 변화가 생김
   - shoutName 메서드는 아무런 변화없이 입력받은 pet의 이름을 말할 수 있다.
 - 즉, 추상 타입을 사용하는 이유
   - 이로 인해 코드의 재사용성과 유연성이 증가!
