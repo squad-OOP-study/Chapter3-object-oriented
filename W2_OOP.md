@@ -113,6 +113,9 @@ Parent d8  =  new D();
 
 **[출처]** [메모리 구조 기본 (1)-섹션 143](https://blog.naver.com/honnynoop/22805940)|**작성자** [자바자바](https://blog.naver.com/honnynoop)
 
++ what is difference between invocation and call in programming?
+Function calling is when you call a function yourself in a program. While function invoking is when it gets called automatically.
+
 ## 추상 타입과 유연성
 
 추상화 는 데이터나 프로세스 등을 의미가 비슷한 개념이나 표현으로 정의하는 과정이다.
