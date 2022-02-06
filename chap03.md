@@ -131,14 +131,14 @@ pet.bark() // 야옹
 
 ```
 
-class Dog : Pet {
+class Dog {
    val name: String = "멍멍이"
    fun bark() {
         println("멍멍")
     }
 }
 
-class Cat : Pet {
+class Cat {
     val name: String = "야옹이"
     fun bark() {
         println("야옹")
@@ -157,7 +157,7 @@ fun shoutName(pet:Any) {
 - 여기에 앵무새가 추가
 
 ```
-class Parrot: Pet {
+class Parrot {
   val name: String = "앵무새"
   fun bark() {
   println("안녕")
