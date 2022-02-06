@@ -117,21 +117,6 @@
 
 ## **추상화 예시**
 
-1. ByteSource 를 상속 하여 사용
-- data를 얻어낼 수 있다는 공통점으로부터 ByteSource 라는 인터페이스 추출
-- data를 얻어낼 수 있는 객체들을 만들어낸 다는 공통점으로 ByteSourceFactory 라는 인터페이스 추출
-
-```kotlin
-sourceType 에 따라서 분기하지 않고 팩토리 패턴안에서 type 에 맞는 객체를 받아낸다.
-캡슐활 실현
-
-val source : ByteSource = ByteSourceFactory.create(sourceType)
-
-sourceType 과 무관하게 ByteSource 인터페이스 메서도 read를 사용하여 데이터를 얻는다.
-추상화 및 다형성 활용
-val data = source.read()
-```
-
 1. LogCollector Interface를 통한 추상화
 
 ```kotlin
@@ -177,7 +162,7 @@ SocketLogReader
 DbTableLogGateway
 ```
 
-1. abstract class를 통한 추상화
+2. abstract class를 통한 추상화
 
 ```kotlin
 // 추상 클래스
