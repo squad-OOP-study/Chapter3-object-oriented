@@ -94,7 +94,8 @@ fun main() {
 
 3> 부모의 메서드로 자식의 메서드를 호출할 수 있다. --> 오버라이딩 했다면  -> Virtual Method Invocation(VMI)에 의하여.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2c46ee91-6176-4340-9dbc-7a2fd009db5e/Untitled.png)
+![a1](https://user-images.githubusercontent.com/83396157/152664430-299493bb-304c-4700-bfc2-d35a68957f6b.png)
+
 
 Parent a3=new A();
 
@@ -104,7 +105,7 @@ Parent a3=new A();
 
 ### 메서드 오버로딩
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bec00716-a3e6-4103-9a5f-4406dc657ea8/Untitled.png)
+![a2](https://user-images.githubusercontent.com/83396157/152664434-44a71d2d-5282-403f-99e7-872be659639b.png)
 
 Parent d8  =  new A();
 
