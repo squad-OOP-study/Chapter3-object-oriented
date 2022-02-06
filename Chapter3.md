@@ -96,7 +96,7 @@
     ```kotlin
     class flowController(val reader: ByteSource) {
         fun run() {
-          reader.collect
+          reader.collect()
         }
     }
     ```
